@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido 💚</title>
+
+<style>
+:root{
+  --verde-fundo:#0f1f17;
+  --verde-card:#162a20;
+  --verde-destaque:#2ecc71;
+  --verde-suave:#8ef5c3;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body{
+  height:100vh;
+  background:var(--verde-fundo);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#e8fff3;
+}
+
+.card{
+  background:var(--verde-card);
+  padding:60px 50px;
+  width:90%;
+  max-width:500px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  animation:fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+  font-size:22px;
+  font-weight:500;
+  margin-bottom:30px;
+  color:var(--verde-suave);
+}
+
+.texto{
+  font-size:17px;
+  min-height:100px;
+  margin-bottom:30px;
+  line-height:1.6;
+  color:#c8ffe4;
+}
+
+button{
+  padding:10px 26px;
+  border-radius:8px;
+  border:1px solid var(--verde-destaque);
+  background:transparent;
+  color:var(--verde-destaque);
+  cursor:pointer;
+  transition:0.25s;
+  font-size:14px;
+  margin:5px;
+}
+
+button:hover{
+  background:var(--verde-destaque);
+  color:#0f1f17;
+}
+
+.final{
+  margin-top:20px;
+  font-size:18px;
+  color:var(--verde-suave);
+  opacity:0;
+  animation:aparecer 1s ease forwards;
+}
+
+@keyframes aparecer{
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Tem algo importante 💚</h1>
+  <div class="texto" id="texto"></div>
+  <div id="botoes">
+    <button onclick="proximaFrase()" id="continuar">Continuar</button>
+  </div>
+  <div id="finalMsg"></div>
+</div>
+
+<script>
+
+const frases=[
+"Eu gosto da calma que você me traz.",
+"Do jeito leve que você muda meu dia.",
+"Da paz que sinto quando estou com você.",
+"E eu queria transformar isso em algo ainda mais especial..."
+];
+
+let index = 0;
+let escrevendo = false;
+const texto = document.getElementById("texto");
+const continuarBtn = document.getElementById("continuar");
+const botoes = document.getElementById("botoes");
+const finalMsg = document.getElementById("finalMsg");
+
+function digitarFrase(frase){
+    escrevendo = true;
+    texto.innerHTML = "";
+    let char = 0;
+
+    function escrever(){
+        if(char < frase.length){
+            texto.innerHTML += frase.charAt(char);
+            char++;
+            setTimeout(escrever, 30);
+        } else {
+            escrevendo = false;
+        }
+    }
+    escrever();
+}
+
+function proximaFrase(){
+    if(escrevendo) return;
+
+    if(index < frases.length){
+        digitarFrase(frases[index]);
+        index++;
+    } else {
+        mostrarPedido();
+    }
+}
+
+function mostrarPedido(){
+    texto.innerHTML = "Você aceita namorar comigo?";
+    botoes.innerHTML = `
+        <button onclick="aceitou()">Sim</button>
+        <button onmouseover="fugir(this)">Não</button>
+    `;
+}
+
+function fugir(btn){
+    btn.style.position="relative";
+    btn.style.left = (Math.random()*40 - 20) + "px";
+    btn.style.top = (Math.random()*20 - 10) + "px";
+}
+
+function aceitou(){
+    botoes.style.display="none";
+    finalMsg.innerHTML="<div class='final'>Então agora é oficial 💚</div>";
+}
+
+</script>
+
+</body>
+</html>
