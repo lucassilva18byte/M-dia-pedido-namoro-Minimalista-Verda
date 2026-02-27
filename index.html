@@ -3,56 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pedido 💚</title>
+<title>Pedido</title>
 
 <style>
 :root{
-  --verde-fundo:#0f1f17;
-  --verde-card:#162a20;
-  --verde-destaque:#2ecc71;
-  --verde-suave:#8ef5c3;
+  --fundo:#0c0f0d;
+  --card:#151917;
+  --verde:#27c46b;
+  --verde-suave:#7ef0b4;
+  --texto:#e9f5ee;
 }
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: 'Inter', sans-serif;
+  font-family:'Inter', sans-serif;
 }
 
 body{
   height:100vh;
-  background:var(--verde-fundo);
+  background:var(--fundo);
   display:flex;
   justify-content:center;
   align-items:center;
-  color:#e8fff3;
+  color:var(--texto);
   overflow:hidden;
   position:relative;
 }
 
-/* PARTÍCULAS */
+/* partículas bem discretas */
 .particulas span{
   position:absolute;
-  width:3px;
-  height:3px;
-  background:rgba(142,245,195,0.4);
+  width:2px;
+  height:2px;
+  background:rgba(39,196,107,0.25);
   border-radius:50%;
-  animation:subir 18s linear infinite;
-  opacity:0.4;
-}
-
-/* CORAÇÕES */
-.coracoes span{
-  position:absolute;
-  font-size:14px;
-  opacity:0.08;
-  animation:flutuar 25s linear infinite;
+  animation:subir 25s linear infinite;
 }
 
 @keyframes subir{
   from{transform:translateY(100vh);}
   to{transform:translateY(-10vh);}
+}
+
+/* corações quase invisíveis */
+.coracoes span{
+  position:absolute;
+  font-size:12px;
+  opacity:0.05;
+  animation:flutuar 35s linear infinite;
 }
 
 @keyframes flutuar{
@@ -61,58 +61,58 @@ body{
 }
 
 .card{
-  background:var(--verde-card);
+  background:var(--card);
   padding:60px 50px;
   width:90%;
-  max-width:500px;
-  border-radius:20px;
+  max-width:480px;
+  border-radius:16px;
   text-align:center;
-  box-shadow:0 10px 40px rgba(0,0,0,0.4);
-  animation:fadeIn 1.2s ease;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
   position:relative;
   z-index:2;
+  animation:fadeIn 1s ease;
 }
 
 @keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
+  from{opacity:0; transform:translateY(15px);}
   to{opacity:1; transform:translateY(0);}
 }
 
 h1{
-  font-size:22px;
+  font-size:20px;
   font-weight:500;
   margin-bottom:30px;
+  letter-spacing:1px;
   color:var(--verde-suave);
 }
 
 .texto{
-  font-size:17px;
+  font-size:16px;
   min-height:100px;
   margin-bottom:30px;
   line-height:1.6;
-  color:#c8ffe4;
+  color:#cfe9dc;
 }
 
 button{
-  padding:10px 26px;
-  border-radius:8px;
-  border:1px solid var(--verde-destaque);
+  padding:9px 22px;
+  border-radius:6px;
+  border:1px solid var(--verde);
   background:transparent;
-  color:var(--verde-destaque);
+  color:var(--verde);
   cursor:pointer;
-  transition:0.25s;
+  transition:0.25s ease;
   font-size:14px;
-  margin:5px;
 }
 
 button:hover{
-  background:var(--verde-destaque);
-  color:#0f1f17;
+  background:var(--verde);
+  color:#0c0f0d;
 }
 
 .final{
   margin-top:20px;
-  font-size:18px;
+  font-size:17px;
   color:var(--verde-suave);
   opacity:0;
   animation:aparecer 1s ease forwards;
@@ -130,42 +130,41 @@ button:hover{
 <div class="coracoes"></div>
 
 <div class="card">
-  <h1>Tem algo importante 💚</h1>
+  <h1>Eu queria te perguntar algo</h1>
   <div class="texto" id="texto"></div>
   <div id="botoes">
-    <button onclick="proximaFrase()" id="continuar">Continuar</button>
+    <button onclick="proximaFrase()">Continuar</button>
   </div>
   <div id="finalMsg"></div>
 </div>
 
 <script>
 
-/* PARTÍCULAS */
+/* partículas */
 const particulas = document.querySelector(".particulas");
-for(let i=0;i<30;i++){
+for(let i=0;i<20;i++){
   let p=document.createElement("span");
   p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(15+Math.random()*10)+"s";
+  p.style.animationDuration=(20+Math.random()*15)+"s";
   particulas.appendChild(p);
 }
 
-/* CORAÇÕES */
+/* corações */
 const coracoes = document.querySelector(".coracoes");
-for(let i=0;i<15;i++){
+for(let i=0;i<8;i++){
   let h=document.createElement("span");
   h.innerHTML="💚";
   h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(20+Math.random()*15)+"s";
-  h.style.fontSize=(12+Math.random()*8)+"px";
+  h.style.animationDuration=(30+Math.random()*20)+"s";
   coracoes.appendChild(h);
 }
 
-/* TEXTO */
+/* texto */
 const frases=[
-"Eu gosto da calma que você me traz.",
-"Do jeito leve que você muda meu dia.",
-"Da paz que sinto quando estou com você.",
-"E eu queria transformar isso em algo ainda mais especial..."
+"Você trouxe leveza para minha vida.",
+"Transformou momentos simples em especiais.",
+"E eu quero continuar construindo isso com você.",
+"Então eu preciso saber..."
 ];
 
 let index = 0;
@@ -183,7 +182,7 @@ function digitarFrase(frase){
         if(char < frase.length){
             texto.innerHTML += frase.charAt(char);
             char++;
-            setTimeout(escrever, 30);
+            setTimeout(escrever, 28);
         } else {
             escrevendo = false;
         }
@@ -212,13 +211,12 @@ function mostrarPedido(){
 
 function fugir(btn){
     btn.style.position="relative";
-    btn.style.left = (Math.random()*40 - 20) + "px";
-    btn.style.top = (Math.random()*20 - 10) + "px";
+    btn.style.left = (Math.random()*35 - 15) + "px";
 }
 
 function aceitou(){
     botoes.style.display="none";
-    finalMsg.innerHTML="<div class='final'>Então agora é oficial 💚</div>";
+    finalMsg.innerHTML="<div class='final'>Agora é oficial 💚</div>";
 }
 
 </script>
